@@ -8,7 +8,10 @@ Flâner is a gentle AI companion that helps people get off the screen and into t
 
 Built for the **Touch Grass** theme: build something with open-weight models that gets people off the screen and into the world. The screen should be the shortest part of the experience.
 
-<!-- Add 3-4 screenshots here: dashboard, plan, phone-away screen, reflection -->
+**Live app:** https://flaner-twp3.onrender.com/
+
+> The app runs on a free Render instance, so the first visit after a quiet period can take up to a minute to wake up. If it looks stuck, wait and refresh once.
+
 
 ---
 
