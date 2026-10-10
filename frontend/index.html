@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#FBF3E7">
+    <title>Flâner</title>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="art" viewBox="0 0 120 120">
+            <defs>
+                <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#F7D9B0" />
+                    <stop offset="1" stop-color="#CFE0D3" />
+                </linearGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#sk)" />
+            <circle cx="68" cy="30" r="11" fill="#FBE9C6" opacity=".9" />
+            <rect x="6" y="46" width="28" height="50" fill="#D98F68" />
+            <rect x="34" y="34" width="22" height="62" fill="#EBB88E" />
+            <rect x="78" y="40" width="20" height="56" fill="#E3A47B" />
+            <rect x="98" y="52" width="22" height="44" fill="#D98F68" />
+            <g fill="#7A4E3A" opacity=".5">
+                <rect x="12" y="54" width="5" height="7" />
+                <rect x="23" y="54" width="5" height="7" />
+                <rect x="40" y="44" width="5" height="7" />
+                <rect x="48" y="44" width="5" height="7" />
+                <rect x="83" y="50" width="5" height="7" />
+                <rect x="104" y="62" width="5" height="7" />
+            </g>
+            <rect y="90" width="120" height="30" fill="#B9774F" />
+            <rect y="87" width="120" height="5" fill="#D19068" />
+            <path d="M69 87c10 0 12-8 8-12" stroke="#141E18" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path d="M51 88c0-10 3-15 9-15s9 5 9 15z" fill="#141E18" />
+            <circle cx="60" cy="63" r="8" fill="#141E18" />
+            <path d="M52.500 60l1-10 6 5zM67.500 60l-1-10-6 5z" fill="#141E18" />
+            <g fill="#E9B44C">
+                <circle cx="57.500" cy="62.500" r="1.300" />
+                <circle cx="62.500" cy="62.500" r="1.300" />
+            </g>
+            <path d="M10 14h16M20 14v3" stroke="#2A2118" stroke-width="2" fill="none" />
+            <rect x="16" y="17" width="8" height="11" rx="2" fill="#F5C45A" stroke="#2A2118" stroke-width="1.500" />
+        </symbol>
+        <symbol id="bloom" viewBox="0 0 160 120">
+            <g fill="none" stroke="#5B7F5E" stroke-width="3" stroke-linecap="round">
+                <path d="M80 112V52M80 90C66 84 58 74 54 62M80 82C94 76 102 66 106 54M80 70C72 64 66 56 64 46" />
+            </g>
+            <g>
+                <circle cx="54" cy="56" r="9" fill="#F2B24E" />
+                <circle cx="106" cy="48" r="10" fill="#E58E6B" />
+                <circle cx="64" cy="40" r="8" fill="#F6DDBE" />
+                <circle cx="80" cy="44" r="11" fill="#E9B44C" />
+                <circle cx="80" cy="44" r="4" fill="#fff" opacity=".7" />
+            </g>
+            <path d="M40 112h80" stroke="#C98760" stroke-width="4" stroke-linecap="round" />
+        </symbol>
+        <symbol id="logo" viewBox="0 0 120 120">
+            <clipPath id="lc2">
+                <rect width="120" height="120" rx="28" />
+            </clipPath>
+            <g clip-path="url(#lc2)">
+                <use href="#art" />
+            </g>
+        </symbol>
+    </svg>
+    <main id="app"></main>
+    <script src="js/config.js"></script>
+    <script>
+        // Only load the Supabase library when login is configured. Local mode makes no outside requests.
+        if (window.TG_CONFIG && TG_CONFIG.SUPABASE_URL && !/YOUR/i.test(TG_CONFIG.SUPABASE_URL)) document.write('<script src="vendor/supabase.js"><\/script>');
+    </script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) addEventListener("load", function () { navigator.serviceWorker.register("/sw.js").catch(function () { }); });
+    </script>
+</body>
+
+</html>
