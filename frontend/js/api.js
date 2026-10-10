@@ -35,6 +35,7 @@ async function makeMission(){
     applyMission(await r.json());
   }catch(e){
     console.warn('AI plan failed, using built-in plan:', e);
+    toast('AI unavailable: ' + String(e.message).slice(0, 140));
     buildMission();
   }
   clearTimeout(to); clearInterval(iv);
@@ -91,6 +92,9 @@ async function loadEval(d){
     if(r.status === 401 && sb){ toast('Your session expired. Please log in again.'); await sb.auth.signOut(); return; }
     if(!r.ok) throw new Error(await r.text());
     S.ev = await r.json();
-  }catch(err){ console.warn('AI acknowledgement failed, using fallback', err); }
+  }catch(err){
+    console.warn('AI acknowledgement failed, using fallback', err);
+    toast('AI unavailable: ' + String(err.message).slice(0, 140));
+  }
   S.evWait = 0; setAi();
 }

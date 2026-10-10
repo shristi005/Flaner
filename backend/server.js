@@ -27,6 +27,7 @@ if (AUTH_ON) console.log('Login: required (Supabase)');
 else if (ALLOW_LOCAL) console.warn('! Login: OFF (ALLOW_LOCAL_MODE=true). Development only.');
 else console.error('! Supabase keys missing. Login is required, so the API will refuse requests until you set SUPABASE_URL and SUPABASE_ANON_KEY.');
 console.log('Plan model: ' + (LLM_MODEL || '(not set)') + ' via ' + BASE);
+console.log('Plan key set:', !!LLM_API_KEY, '| length:', (LLM_API_KEY || '').length, '| Reflect key set:', !!REFLECT.key);
 console.log('Reflection model: ' + (RP === 'off' ? 'off (built-in text)' : (REFLECT.model || '(not set)') + ' via ' + (RP === 'same' ? 'same as plan model' : REFLECT.base)));
 if (RP === 'huggingface' && (!REFLECT.key || !REFLECT.model)) console.warn('! REFLECT_PROVIDER=huggingface needs HF_TOKEN and REFLECT_MODEL in backend/.env');
 if (!LLM_MODEL) console.warn('! Set LLM_MODEL in backend/.env (e.g. qwen2.5:7b). Missions use the built-in fallback until then.');
@@ -125,6 +126,7 @@ function parseMission(text) {
 
 app.post('/api/mission', requireUser, limit, async (req, res) => {
   try {
+    console.log('mission request from user', req.user.id);
     if (!LLM_MODEL) return res.status(503).send('Model not configured');
     const b = req.body || {}, p = b.profile || {}, t = (x, n) => String(x || '').slice(0, n);
     const shop = (Array.isArray(b.shop) ? b.shop : []).slice(0, 25).map(x => t(x, 60)).filter(Boolean);
@@ -139,10 +141,12 @@ What they think might happen: ${t(b.fear, 300) || 'not said'}
 Name: ${t(p.name, 40)}
 Comfort: ${['gentle', 'steady', 'bold'].includes(p.comfort) ? p.comfort : 'steady'}
 About them: ${t(p.about, 300)}`;
-    res.json(parseMission(await callLLM(msg)));
+    const out = parseMission(await callLLM(msg));
+    console.log('mission ok:', out.title);
+    res.json(out);
   } catch (e) {
-    console.error(e.message);
-    res.status(502).send('Mission generation failed');
+    console.error('mission failed:', e.message);
+    res.status(502).send('Mission generation failed: ' + String(e.message).slice(0, 200));
   }
 });
 
@@ -179,8 +183,8 @@ What they noticed: ${t(b.noticed, 300) || 'not said'}
 Name: ${t(p.name, 40)}`;
     res.json(parseReflection(await callLLM(msg, REFLECT_SYSTEM, REFLECT)));
   } catch (e) {
-    console.error(e.message);
-    res.status(502).send('Reflection generation failed');
+    console.error('reflection failed:', e.message);
+    res.status(502).send('Reflection generation failed: ' + String(e.message).slice(0, 200));
   }
 });
 
