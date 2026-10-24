@@ -116,7 +116,7 @@ Login / Sign up
 | Layer                  | Technology                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------- |
 | Frontend               | HTML, CSS and vanilla JavaScript (no framework, no build step)                                    |
-| Backend                | Node.js 18+ and Express                                                                           |
+| Backend                | Node.js 22+ and Express                                                                           |
 | Auth and database      | Supabase (Auth, Postgres, Row Level Security)                                                     |
 | Plan model             | Groq, running the open-weight `openai/gpt-oss-20b` through Groq's OpenAI-compatible API           |
 | Reflection model       | Google Gemini (`gemini-3.5-flash-lite`) through Google's OpenAI-compatible endpoint               |
@@ -230,7 +230,7 @@ Notes:
 
 ## Setup
 
-You need Node.js 18+, a Supabase project, and API keys for your models.
+You need Node.js 22+, a Supabase project, and API keys for your models.
 
 1. **Supabase.** Create a project. In the SQL Editor, run `backend/supabase/schema.sql` (safe to re-run).
 2. **Auth settings.** Authentication, Email provider: keep "Confirm email" on for real use (off only while testing). Under URL Configuration, add your site address (for example `http://localhost:3000`) to the redirect URLs.
@@ -355,4 +355,3 @@ Free instances spin down after 15 minutes of no traffic, so the first request af
 - `@supabase/supabase-js` (MIT), included in `frontend/vendor`.
 - Open-weight model: `openai/gpt-oss-20b`, served by Groq.
 - Built for the Touch Grass hackathon.
-
